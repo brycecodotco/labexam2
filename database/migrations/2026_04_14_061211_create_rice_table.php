@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('rice_name');
             $table->decimal('price', 8, 2);
-            $table->decimal('stock, 10,2');
-            $table->string('description');
+            $table->decimal('stock', 10, 2);
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

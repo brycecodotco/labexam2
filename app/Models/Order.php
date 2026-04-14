@@ -8,7 +8,9 @@ class Order extends Model
 {
     protected $fillable = [
         'rice_id', 
-        'quantity', 
+        'quantity',
+        'total_cost',
+        'status'
         
         ];
 

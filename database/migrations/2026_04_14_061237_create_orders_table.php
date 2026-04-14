@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('rice_id');
+            $table->decimal('quantity', 10, 2);
+            $table->decimal('total_cost', 10, 2);
+            $table->enum('status',['Paid', 'Unpaid'])->default('Unpaid');
             $table->timestamps();
 
             $table->foreign('rice_id')
