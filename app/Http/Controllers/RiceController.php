@@ -46,10 +46,10 @@ class RiceController extends Controller
 
         $rice->update($request->all());
 
-        return redirect()->route('rice.index')->with('success', 'Rice updated successfully.');
+        return redirect()->route('dashboard')->with('success', 'Rice updated successfully.');
     }
 
-    public function delete(Request $request, $id)
+    public function destroy(Request $request, $id)
     {
         $rice = Rice::findOrFail($id);
         $rice->delete();

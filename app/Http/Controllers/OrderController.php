@@ -22,7 +22,7 @@ class OrderController extends Controller
         return view('orders.create', compact('rices'));
     }
 
-    public function store(Request $request)
+    public function add(Request $request)
     {
         $request->validate([
             'rice_id' => 'required|exists:rice,id',

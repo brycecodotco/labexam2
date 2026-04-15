@@ -1,66 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Rice Business Management</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen" style="background-image: url('https://www.transparenttextures.com/patterns/rice-paper.png');">
+<x-guest-layout>
+    <div class="col-lg-6 d-none d-lg-flex auth-side-image">
+        <h1 class="display-4 fw-bold">RICE<span class="text-warning">BIZ</span></h1>
+        <p class="lead">Start managing your rice stocks and sales today.</p>
+    </div>
 
-    <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border-t-8 border-green-600">
-        
-        <div class="text-center mb-8">
-            <h2 class="text-3xl font-extrabold text-gray-800">Create <span class="text-green-600">Account</span></h2>
-            <p class="text-gray-500 mt-1">Register for the Rice System</p>
+    <div class="col-lg-6 p-4 p-md-5">
+        <div class="mb-4">
+            <h2 class="fw-bold text-dark">Register Account</h2>
+            <p class="text-muted">Join our platform to streamline your business.</p>
         </div>
-
-        @if ($errors->any())
-            <div class="mb-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded text-sm">
-                <ul class="list-disc list-inside">
-                    @foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach
-                </ul>
-            </div>
-        @endif
 
         <form method="POST" action="{{ route('register') }}">
             @csrf
-
-            <!-- Name -->
-            <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2">Full Name</label>
-                <input type="text" name="name" value="{{ old('name') }}" required autofocus class="w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 px-4 py-2">
+            @if ($errors->any())
+                <div class="alert alert-danger border-0 small">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <div class="mb-3">
+                <label class="form-label fw-semibold small">Full Name</label>
+                <input type="text" name="name" class="form-control border-light-subtle bg-light" required>
             </div>
 
-            <!-- Email Address -->
-            <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2">Email Address</label>
-                <input type="email" name="email" value="{{ old('email') }}" required class="w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 px-4 py-2">
+            <div class="mb-3">
+                <label class="form-label fw-semibold small">Email Address</label>
+                <input type="email" name="email" class="form-control border-light-subtle bg-light" required>
             </div>
 
-            <!-- Password -->
-            <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2">Password</label>
-                <input type="password" name="password" required class="w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 px-4 py-2">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold small">Password</label>
+                    <input type="password" name="password" class="form-control border-light-subtle bg-light" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold small">Confirm Password</label>
+                    <input type="password" name="password_confirmation"
+                        class="form-control border-light-subtle bg-light" required>
+                </div>
             </div>
+            <x-input-error :messages="$errors->get('password')" class="mb-3 small" />
 
-            <!-- Confirm Password -->
-            <div class="mb-6">
-                <label class="block text-gray-700 font-bold mb-2">Confirm Password</label>
-                <input type="password" name="password_confirmation" required class="w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-200 px-4 py-2">
-            </div>
+            <button type="submit" class="btn btn-dark btn-lg w-100 py-3 fw-bold shadow-sm mb-3">Create Account</button>
 
-            <button type="submit" class="w-full bg-green-600 text-white font-bold py-3 px-4 rounded-lg shadow hover:bg-green-700 transition duration-300">
-                Register Account
-            </button>
-
-            <div class="mt-6 text-center border-t pt-4">
-                <p class="text-sm text-gray-600">Already have an account?</p>
-                <a href="{{ route('login') }}" class="text-green-600 hover:text-green-800 font-bold text-sm">Sign in here</a>
-            </div>
+            <p class="text-center small text-muted">
+                Already registered? <a href="{{ route('login') }}" class="fw-bold text-decoration-none">Login here</a>
+            </p>
         </form>
-
     </div>
-
-</body>
-</html>
+</x-guest-layout>
